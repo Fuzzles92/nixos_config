@@ -26,6 +26,8 @@
       ./hardware-configuration.nix
       ./lanzaboote.nix
       ./config-gnome.nix
+      #./config-kde.nix
+      #./config-qtile.nix
     ];
 
 #==========================================#
@@ -136,7 +138,7 @@ users.users.fuzzles = {
     description = "Fuzzles";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-	#vim
+	  #vim
     ];
   };
 
@@ -155,7 +157,7 @@ programs.git = {
 	config = {
 	user.name = "Fuzzles92";
 	user.email = "matthewsproston92@gmail.com";
-	init.defaultBranch = "development";
+	init.defaultBranch = "master";
 	};
 };
 programs.virt-manager.enable = true;
@@ -169,7 +171,7 @@ programs.virt-manager.enable = true;
   nixpkgs.config.allowUnfree = true;
 
 #==========================================#
-#           Sysem Packages                 #
+#           System Packages                #
 #==========================================#
 environment.systemPackages = with pkgs; [
 	thunderbird		# Email Client
@@ -199,7 +201,7 @@ environment.systemPackages = with pkgs; [
 #           Enable Services                #
 #==========================================#
 services.teamviewer.enable = true;     # Teamviewer
-services.flatpak.enable = true;        # Flatpak
+#services.flatpak.enable = true;        # Flatpak
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
@@ -213,11 +215,11 @@ services.flatpak.enable = true;        # Flatpak
 #==========================================#
 #           Garbage Collection             #
 #==========================================#
-nix.gc = {
-	automatic = true;
-	dates = "weekly";
-	options = "--delete-older-than 30d";
-};
+#nix.gc = {
+	#automatic = true;
+	#dates = "weekly";
+	#options = "--delete-older-than 10d";
+#};
   
 #==========================================#
 #           State Version                  #

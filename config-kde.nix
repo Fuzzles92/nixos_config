@@ -1,34 +1,22 @@
 #==========================================#
-#         My Nix GNOME Configuation        #
+#         My Nix KDE Configuation        #
 #==========================================#
-
-#==========================================#
-#           GNOME gSettings                #
-#==========================================#
-
-#gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
-#gsettings set org.gnome.desktop.interface cursor-size 24
-#gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
-#gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
-#gsettings set org.gnome.shell.extensions.user-theme name 'Adwaita'
 
 { config, pkgs, ... }:
 
 {
 
 #==========================================#
-#               GNOME Desktop              #
+#               KDE DE                     #
 #==========================================#
-services.xserver.displayManager.gdm = {
-		enable = true;
-		};
-services.xserver.desktopManager.gnome.enable = true;
-services.xserver.excludePackages = with pkgs; [
-  	pkgs.xterm		# xTerm
-  ];
+
+services.xserver.enable = true; # optional
+services.displayManager.sddm.enable = true;
+services.displayManager.sddm.wayland.enable = true;
+services.desktopManager.plasma6.enable = true;
 
 #==========================================#
-#             GNOME Excludes               #
+#             KDE Excludes                 #
 #==========================================#
 environment.gnome.excludePackages = with pkgs.gnome; [
 	pkgs.gnome-calendar		# Gnome Calendar
@@ -60,23 +48,5 @@ environment.gnome.excludePackages = with pkgs.gnome; [
 	#pkgs.file-roller		# Gnome Archive Manager
 	#pkgs.gnome-calculator		# Gnome Calculator
   ];
-  
-#==========================================#
-#           System Packages                #
-#==========================================#
-environment.systemPackages = with pkgs; [
-	# Gnome Extensions
-	gnomeExtensions.appindicator
-	gnomeExtensions.blur-my-shell
-	gnomeExtensions.dash-to-dock
-	gnomeExtensions.caffeine
-	gnomeExtensions.gsconnect
-	gnomeExtensions.logo-menu
-	gnomeExtensions.search-light
-	# Other Applications
-	gnome-tweaks		# Additional Gnome Changes
-	ignition		# Start up Applications
-	];
-
 }
 
