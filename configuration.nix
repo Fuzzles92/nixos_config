@@ -2,10 +2,6 @@
 #           My Nix Configuation            #
 #==========================================#
 
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 #==========================================#
 #           Nix Useful Commands            #
 #==========================================#
@@ -26,8 +22,6 @@
       ./hardware-configuration.nix
       ./lanzaboote.nix
       ./config-gnome.nix
-      #./config-kde.nix
-      #./config-qtile.nix
     ];
 
 #==========================================#
@@ -168,7 +162,7 @@ programs.virt-manager.enable = true;
 #==========================================#
 #           Enable Unfree Packages         #
 #==========================================#
-  nixpkgs.config.allowUnfree = true;
+nixpkgs.config.allowUnfree = true;
 
 #==========================================#
 #           System Packages                #
@@ -187,6 +181,7 @@ environment.systemPackages = with pkgs; [
 	sbctl			# Secure Boot Key Manager
 	niv			# Easy Dependency Management for Nix Projects
 	wget			# World Wide Web Get
+	neofetch		#
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -215,11 +210,11 @@ services.teamviewer.enable = true;     # Teamviewer
 #==========================================#
 #           Garbage Collection             #
 #==========================================#
-#nix.gc = {
-	#automatic = true;
-	#dates = "weekly";
-	#options = "--delete-older-than 10d";
-#};
+nix.gc = {
+	automatic = true;
+	dates = "weekly";
+	options = "--delete-older-than 10d";
+};
   
 #==========================================#
 #           State Version                  #

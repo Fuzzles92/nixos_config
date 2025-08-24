@@ -71,8 +71,8 @@ environment.systemPackages = with pkgs; [
 	gnomeExtensions.dash-to-dock
 	gnomeExtensions.caffeine
 	gnomeExtensions.gsconnect
-	gnomeExtensions.logo-menu
-	gnomeExtensions.search-light
+	#gnomeExtensions.logo-menu
+	#gnomeExtensions.search-light
 	# Other Applications
 	gnome-tweaks		# Additional Gnome Changes
 	ignition		# Start up Applications
