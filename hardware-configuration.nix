@@ -33,9 +33,9 @@
 #          Additional File Systems         #
 #==========================================#
 
-  # 1TB SSD
-  fileSystems."/mnt/1TB_SSD" =
-    { device = "/dev/disk/by-uuid/8be4eccc-776e-4086-a2bd-1b28dcba77de";
+  # Linux 250GB SSD
+  fileSystems."/mnt/Linux_250GB_SSD" =
+    { device = "/dev/disk/by-uuid/533ce84b-7642-416c-883e-33d07efb9fae";
       fsType = "ext4";
       options = [ 
 	"defaults"

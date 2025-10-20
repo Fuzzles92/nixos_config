@@ -20,8 +20,11 @@
 #               GNOME Desktop              #
 #==========================================#
 services.xserver.displayManager.gdm = {
-		enable = true;
-		};
+  enable = true;
+  autoLogin.enable = true;
+  autoLogin.user = "fuzzles";
+};
+
 services.xserver.desktopManager.gnome.enable = true;
 services.xserver.excludePackages = with pkgs; [
   	pkgs.xterm		# xTerm
@@ -47,7 +50,7 @@ environment.gnome.excludePackages = with pkgs.gnome; [
 	pkgs.decibels			# Gnome Music Player
 	pkgs.totem			# Gnome Video Player
 	pkgs.geary			# Gnome Email Client
-	pkgs.baobab			# Gnome Disk Usage Analyzer
+	#pkgs.baobab			# Gnome Disk Usage Analyzer
 	pkgs.seahorse			# Gnome Password Manager
 	pkgs.epiphany			# Gnome Web Browser
 	pkgs.yelp			# Gnome Help Viewer
@@ -71,11 +74,15 @@ environment.systemPackages = with pkgs; [
 	gnomeExtensions.dash-to-dock
 	gnomeExtensions.caffeine
 	gnomeExtensions.gsconnect
-	#gnomeExtensions.logo-menu
+	gnomeExtensions.logo-menu
 	#gnomeExtensions.search-light
 	# Other Applications
 	gnome-tweaks		# Additional Gnome Changes
 	ignition		# Start up Applications
+	pika-backup		# Backup Application
+	impression		# ISO Image Writer
+	p7zip			# Port of 7Zip
+	sticky-notes		# Sticky Notes
 	];
 
 }

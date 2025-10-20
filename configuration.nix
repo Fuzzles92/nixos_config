@@ -21,7 +21,9 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./lanzaboote.nix
-      ./config-gnome.nix
+      ./desktops/config-gnome.nix
+      #./desktops/config-kde.nix
+      #./desktops/config-xfce.nix
     ];
 
 #==========================================#
@@ -29,6 +31,7 @@
 #==========================================#
 boot.loader.systemd-boot.enable = true;
 boot.loader.efi.canTouchEfiVariables = true;
+boot.supportedFilesystems = [ "ntfs" ];
 
 #==========================================#
 #      Automatic Updates & Rebuild         #
@@ -41,17 +44,9 @@ system.autoUpgrade = {
 	};
 
 #==========================================#
-#               Podman                     #
-#==========================================#
-virtualisation.podman = {
-  		enable = true;
-  		dockerCompat = true;
-};
-
-#==========================================#
 #           System Information             #
 #==========================================#
-networking.hostName = "Thor"; # Define your hostname.
+networking.hostName = "Layla"; # Define your hostname.
 networking.networkmanager.enable = true;
 time.timeZone = "Europe/London";
 
@@ -132,20 +127,24 @@ users.users.fuzzles = {
     description = "Fuzzles";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-	  #vim
+    #vim
     ];
   };
 
 #==========================================#
 #           Enable Applications            #
 #==========================================#
-programs.firefox.enable = true;
+programs.firefox = {
+	enable = true;
+};
+
 programs.steam = {
 	enable = true;
 	remotePlay.openFirewall = true;
 	dedicatedServer.openFirewall = true;
 	localNetworkGameTransfers.openFirewall = true;
 };
+
 programs.git = {
 	enable = true;
 	config = {
@@ -154,10 +153,16 @@ programs.git = {
 	init.defaultBranch = "master";
 	};
 };
+
 programs.virt-manager.enable = true;
 	virtualisation.libvirtd.enable = true;
 	virtualisation.spiceUSBRedirection.enable = true;
 	users.groups.libvirtd.members = ["fuzzles"];
+
+virtualisation.podman = {
+  		enable = true;
+  		dockerCompat = true;
+};
 
 #==========================================#
 #           Enable Unfree Packages         #
@@ -168,7 +173,7 @@ nixpkgs.config.allowUnfree = true;
 #           System Packages                #
 #==========================================#
 environment.systemPackages = with pkgs; [
-	thunderbird		# Email Client
+  	thunderbird		# Email Client
 	libreoffice		# Office Suite
 	discord			# Discord Client
 	spotify			# Spotify Client
@@ -177,11 +182,13 @@ environment.systemPackages = with pkgs; [
 	distrobox		# Containers
 	boxbuddy		# GUI For Distrobox
 	vlc			# Media & Video Player
-	pika-backup		# Backup Application
 	sbctl			# Secure Boot Key Manager
 	niv			# Easy Dependency Management for Nix Projects
 	wget			# World Wide Web Get
-	neofetch		#
+	neofetch		# CLI Information Tool
+	ntfs3g			# Open Source Driver for NTFS
+	mangohud		# Overlay
+	mangojuice		# GUI For Mangohud
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
