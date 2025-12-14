@@ -6,7 +6,7 @@
 #           Nix Useful Commands            #
 #==========================================#
 #nixos-help
-#sudo nixos-rebuild switch # Rebuild and Switch
+#sudo nixos-re switch # Rebuild and Switch
 #sudo nixos-rebuild boot # Rebuild and wait till reboot
 #sudo nixos-rebuild switch --upgrade # Upgrade and Switch
 #sudo nix-collect-garbage --delete-old # Delete All But Current Image
@@ -25,6 +25,11 @@
       #./desktops/config-kde.nix
       #./desktops/config-xfce.nix
     ];
+    
+#==========================================#
+#                Flakes                    #
+#==========================================#
+nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
 #==========================================#
 #              Bootloader                  #
@@ -46,7 +51,7 @@ system.autoUpgrade = {
 #==========================================#
 #           System Information             #
 #==========================================#
-networking.hostName = "Layla"; # Define your hostname.
+networking.hostName = "Layla";
 networking.networkmanager.enable = true;
 time.timeZone = "Europe/London";
 
@@ -203,7 +208,18 @@ environment.systemPackages = with pkgs; [
 #           Enable Services                #
 #==========================================#
 services.teamviewer.enable = true;     # Teamviewer
-#services.flatpak.enable = true;        # Flatpak
+
+#==========================================#
+#               Flatpak                    #
+#==========================================#
+services.flatpak.enable = true;        # Flatpak
+systemd.services.flatpak-repo = {
+  wantedBy = [ "multi-user.target" ];
+  path = [ pkgs.flatpak ];
+  script = ''
+    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+  '';
+};
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
@@ -220,7 +236,7 @@ services.teamviewer.enable = true;     # Teamviewer
 nix.gc = {
 	automatic = true;
 	dates = "weekly";
-	options = "--delete-older-than 10d";
+	options = "--delete-older-than 20d";
 };
   
 #==========================================#
