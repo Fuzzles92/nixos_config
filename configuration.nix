@@ -29,7 +29,7 @@
 #==========================================#
 #                Flakes                    #
 #==========================================#
-nix.settings.experimental-features = [ "nix-command" "flakes" ];
+#nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
 #==========================================#
 #              Bootloader                  #
@@ -41,12 +41,12 @@ boot.supportedFilesystems = [ "ntfs" ];
 #==========================================#
 #      Automatic Updates & Rebuild         #
 #==========================================#
-system.autoUpgrade = {
-	enable = true;
-	allowReboot = false;
-	dates = "weekly";
-	operation = "boot";
-	};
+#system.autoUpgrade = {
+#	enable = true;
+#	allowReboot = false;
+#	dates = "weekly";
+#	operation = "boot";
+#	};
 
 #==========================================#
 #           System Information             #
